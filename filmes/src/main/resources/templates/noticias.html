@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>Central Filmes</title>
+</head>
+<body style="background-color:#ebf0f1">
+<h1 class="text-center">Central Filmes</h1>
+
+<div class="container">
+  <hr>
+  <div class="d-flex justify-content-around">
+    <a style="flex: 1; text-align: center;" th:href="@{/}">Início</a>
+    <a style="flex: 1; text-align: center;" th:href="@{/filme}">Filmes</a>
+    <a style="flex: 1; text-align: center;" th:href="@{/ator}">Atores</a>
+    <a style="flex: 1; text-align: center;" th:href="@{/noticia}">Notícias</a>
+  </div>
+  <hr>
+  <h3>Notícias</h3>
+
+  <div class="container">
+    <div class="row my-3" th:each="noticia: ${noticias}">
+      <div class="col">
+        <img style="max-height:190px;" th:src="${noticia.getImagem()}"/>
+      </div>
+      <div class="col">
+        <div class="d-flex flex-column align-self-center">
+          <h4 th:text="${noticia.titulo}"></h4>
+          <p th:text="'Autor: ' + ${noticia.autor}"></p>
+          <p style="overflow: hidden;max-height: 200px;" th:text="${noticia.descricao}"></p>
+        </div>
+
+      </div>
+
+      <div class="col">
+        <div class="d-flex" style="gap: 10px;">
+          <a th:href="@{/noticia/editar/{id}(id=${noticia.id})}">Editar</a>
+          <a th:href="@{/noticia/remover/{id}(id=${noticia.id})}">Excluir</a>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <a th:href="@{/noticia/novo}">Adicionar notícia</a>
+  </div>
+</div>
+<br>
+<br>
+</body>
+</html>

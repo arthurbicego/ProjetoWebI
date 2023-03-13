@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Central Filmes</title>
+</head>
+<body style="background-color:#ebf0f1">
+<h1 class="text-center">Central Filmes</h1>
+
+<div class="container">
+    <hr>
+    <div class="d-flex justify-content-around">
+        <a style="flex: 1; text-align: center;" th:href="@{/}">Início</a>
+        <a style="flex: 1; text-align: center;" th:href="@{/filme}">Filmes</a>
+        <a style="flex: 1; text-align: center;" th:href="@{/ator}">Atores</a>
+        <a style="flex: 1; text-align: center;" th:href="@{/noticia}">Notícias</a>
+    </div>
+    <hr>
+    <h3>Adicionar Filme</h3>
+    <div class="constant-values-container">
+        <div class="col-sm-6">
+            <form th:object="${filme}" method="post" th:action="@{/filme/novo}">
+                <fieldset>
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="titulo" name="titulo" th:field="*{titulo}" required/>
+                    <br>
+
+                    <label for="genero">Gênero:</label>
+                    <input type="text" id="genero" name="genero" th:field="*{genero}" required/>
+                    <br>
+
+                    <label for="duracao">Duração:</label>
+                    <input type="number" min="0" id="duracao" name="duracao" th:field="*{duracao}" required/>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="sinopse">Sinopse:</label>
+                        <textarea class="form-control" id="sinopse" name="sinopse" th:field="*{sinopse}" rows="3" required></textarea>
+                    </div>
+                    <br>
+
+                    <label for="imagem">Imagem:</label>
+                    <input type="text" id="imagem" name="imagem" th:field="*{imagem}" required/>
+                    <br>
+
+                </fieldset>
+
+                <fieldset>
+                    <label for="atores">Escolha os atores:</label>
+
+                    <select th:field="*{atoresIds}" multiple="multiple" class="form-control" name="atores" id="atores" style="height: 150px; overflow-y: auto;">
+                        <option
+                                th:each="ator: ${todos_atores}"
+                                th:value="${ator.id}"
+                                th:text="${ator.nome}"
+                        >Nome do Ator</option>
+                    </select>
+
+                </fieldset>
+                <br>
+
+                <button type="submit"> Salvar</button>
+                <a th:href="@{/filme}" >Cancelar</a>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
